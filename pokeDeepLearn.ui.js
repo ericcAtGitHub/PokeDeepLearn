@@ -210,7 +210,7 @@ ${dataDescTableHeader}
                 const pokeImg = new Image()
 
                 pokeImg.onload = () => {
-                    document.getElementById(getDemoImgId(i)).src = pokeImg.src
+                    document.getElementById(getDemoImgId(i))?.src = pokeImg.src
                     
                     if (model4Predict) {
                         updateDemoPredict([getPredictionObj(pokeData, model4Predict, pokeImg, pokeNo)])
@@ -277,13 +277,13 @@ ${dataDescTableHeader}
                 holder?.classList.remove(LOW_PREDICT_CLS_NAME)
 
                 if (pokeTypePredValue > HIGH_PREDICT_THRESHOLD) {
-                    holder.classList.add(HIGH_PREDICT_CLS_NAME)
+                    holder?.classList.add(HIGH_PREDICT_CLS_NAME)
                 } else {
-                    holder.classList.add(LOW_PREDICT_CLS_NAME)
+                    holder?.classList.add(LOW_PREDICT_CLS_NAME)
                 }
 
                 //console.log(document.getElementById(toBeUpdatedEleIds[1]).innerText)
-                document.getElementById(toBeUpdatedEleIds[1]).innerText = pokeTypePredValue
+                document.getElementById(toBeUpdatedEleIds[1])?.innerText = pokeTypePredValue
                 
             })
         }
