@@ -210,7 +210,10 @@ ${dataDescTableHeader}
                 const pokeImg = new Image()
 
                 pokeImg.onload = () => {
-                    document.getElementById(getDemoImgId(i))?.src = pokeImg.src
+                    const toBeUpdatedImg = document.getElementById(getDemoImgId(i))
+                    if (toBeUpdatedImg) {
+                        toBeUpdatedImg.src = pokeImg.src
+                    }
                     
                     if (model4Predict) {
                         updateDemoPredict([getPredictionObj(pokeData, model4Predict, pokeImg, pokeNo)])
@@ -283,7 +286,10 @@ ${dataDescTableHeader}
                 }
 
                 //console.log(document.getElementById(toBeUpdatedEleIds[1]).innerText)
-                document.getElementById(toBeUpdatedEleIds[1])?.innerText = pokeTypePredValue
+                const toBeUpdatedTextDom = document.getElementById(toBeUpdatedEleIds[1])
+                if (toBeUpdatedTextDom) {
+                    toBeUpdatedTextDom.innerText = pokeTypePredValue
+                }
                 
             })
         }
@@ -291,7 +297,7 @@ ${dataDescTableHeader}
 
     // this function is to update the demo table during stage two.
     function PredictDemo(pokeData, model4Predict) {
-
+        //alert(456) // test code. c.f. "StageOneHandler()"
         tf.tidy(() => {
 
             const predictions = []
@@ -395,8 +401,20 @@ ${dataDescTableHeader}
     }
 
     async function StageOneHandler(pokeData) {
-        replaceShowDemoCallback(async() => {
+        replaceShowDemoCallback(async () => {
+
+            startBtnEle.setAttribute('disabled', true)
+
             await showDemoTable(myData)
+
+            // We handle "startBtnEle" state here
+            // because otherwise "PredictDemo()" may work on null element
+            // The following are test code:
+            /*
+            await new Promise((resolve) => setTimeout(resolve, 5000))
+            alert(123)*/
+
+            startBtnEle.removeAttribute('disabled')
         })
 
         await showDemoTable(myData)
