@@ -1,13 +1,12 @@
-const IS_DEV = true
+const IS_DEV = false
 const devLog = (toBeLogged) => {
     if (IS_DEV) {
         console.log(toBeLogged)
     }
 }
 
-const IS_DOWNLOAD_MODEL_AFTER_TRAINING = true
+const IS_DOWNLOAD_MODEL_AFTER_TRAINING = IS_DEV
 const PRE_TRAINED_MODEL_PATH = 'pretrainedModel/my-trained-model-1646312310444.json'
-const IS_TRAIN_PRE_TRAINED_MODEL = false
 
 const HIGH_PREDICT_THRESHOLD = 0.49
 
